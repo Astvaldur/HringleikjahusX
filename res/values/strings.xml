@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">Colosseum</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_adallvalmynd">Adallvalmynd</string>
+	 <string name="leikur_5">Alien Invaders</string>
+</resources>
