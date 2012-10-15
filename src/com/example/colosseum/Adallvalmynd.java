@@ -1,55 +1,101 @@
 package com.example.colosseum;
 
-import java.util.ArrayList;  
-import java.util.Arrays;  
-  
-import android.app.Activity;  
-import android.os.Bundle;  
-import android.widget.ArrayAdapter;  
-import android.widget.ListView;  
 
-public class Adallvalmynd extends Activity {
+//Fyrir Listview
+import android.app.ListActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
-	  private ListView mainListView ;  
-	  private ArrayAdapter<String> listAdapter ;  
-
-	    
-	  /** Called when the activity is first created. */ 
+// Fyrir Menu, það má kannski sleppa activity
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
+ 
+public class Adallvalmynd extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adallvalmynd);
-        
-        // Find the ListView resource.   
-        mainListView = (ListView) findViewById( R.id.mainListView );  
-     // Create and populate a List of planet names.  
-        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",  
-                                          "Jupiter", "Saturn", "Uranus", "Neptune"};    
-        ArrayList<String> planetList = new ArrayList<String>();  
-        planetList.addAll( Arrays.asList(planets) );  
-          
-        // Create ArrayAdapter using the planet list.  
-        listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, planetList);  
-          
-        // Add more planets. If you passed a String[] instead of a List<String>   
-        // into the ArrayAdapter constructor, you must not add more items.   
-        // Otherwise an exception will occur.  
-        listAdapter.add( "Ceres" );  
-        listAdapter.add( "Pluto" );  
-        listAdapter.add( "Haumea" );  
-        listAdapter.add( "Makemake" );  
-        listAdapter.add( "Eris" );  
-          
-        // Set the ArrayAdapter as the ListView's adapter.  
-        mainListView.setAdapter( listAdapter );        
-      }  
-
-}
-
-    
  
-
-      
-
-  
+        // storing string resources into Array
+        String[] Leikir = getResources().getStringArray(R.array.Leikir_val);
+ 
+        // Binding resources Array to ListAdapter
+        this.setListAdapter(new ArrayAdapter<String>(this, R.layout.lista_hlutur, R.id.l_hlutur, Leikir));
+        ListView lv = getListView();
+        
+        // listening to single list item on click
+        lv.setOnItemClickListener(new OnItemClickListener() 
+        {
+          public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
+          {
+ 
+              // selected item
+              String product = ((TextView) view).getText().toString();
+ 
+              // Launching new Activity on selecting single List Item
+              Intent i = new Intent(getApplicationContext(), Leikur1.class);
+              // sending data to new activity
+              i.putExtra("product", product);
+              startActivity(i);
+ 
+          }
+        });
+    }
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.layout.menu, menu);
+        return true;
+    }
+ 
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+ 
+        switch (item.getItemId())
+        {
+        case R.id.menu_users:
+        	 Intent use = new Intent(getApplicationContext(), Leikur1.class);
+             // sending data to new activity
+             startActivity(use);
+             return true;
+ 
+        case R.id.menu_save:
+            Toast.makeText(Adallvalmynd.this, "Save is Selected", Toast.LENGTH_SHORT).show();
+            return true;
+ 
+        case R.id.menu_connect_other: 
+        	Intent co = new Intent(getApplicationContext(), Leikur1.class);
+        // sending data to new activity
+        startActivity(co);
+            return true;
+ 
+        case R.id.menu_share:
+            Toast.makeText(Adallvalmynd.this, "Share is Selected", Toast.LENGTH_SHORT).show();
+            return true;
+ 
+        case R.id.menu_delete:
+            Toast.makeText(Adallvalmynd.this, "Delete is Selected", Toast.LENGTH_SHORT).show();
+            return true;
+ 
+        case R.id.menu_preferences:
+            Toast.makeText(Adallvalmynd.this, "Preferences is Selected", Toast.LENGTH_SHORT).show();
+            return true;
+ 
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+}
     
