@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Leikir_val">
+        <item>Leikur 1</item>
+        <item>Leikur 2</item>
+        <item>Leikur 3</item>
+        <item>Leikur 4</item>
+        <item>Leikur 5</item>
+        <item>Leikur 6</item>
+        <item>Leikur 7</item>
+        <item>Leikur 8</item>
+        <item>Leikur 9</item>
+        <item>Leikur 10</item>
+    </string-array>
+</resources>
