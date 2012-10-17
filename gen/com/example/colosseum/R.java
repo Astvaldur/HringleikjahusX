@@ -24,8 +24,6 @@ public final class R {
         public static final int btnLinkToRegisterScreen=0x7f08000d;
         public static final int btnLogin=0x7f08000c;
         public static final int l_hlutur=0x7f080002;
-        public static final int loginEmail=0x7f080009;
-        public static final int loginPassword=0x7f08000a;
         public static final int login_error=0x7f08000b;
         public static final int mainListView=0x7f080000;
         public static final int menu_connect_other=0x7f080005;
@@ -35,6 +33,8 @@ public final class R {
         public static final int menu_settings=0x7f08000e;
         public static final int menu_share=0x7f080006;
         public static final int menu_users=0x7f080003;
+        public static final int txtPassword=0x7f08000a;
+        public static final int txtUser=0x7f080009;
     }
     public static final class layout {
         public static final int activity_adallvalmynd=0x7f030000;
