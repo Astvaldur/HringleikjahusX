@@ -32,8 +32,7 @@ public class User extends Activity {
         btnRegister = (Button) findViewById(R.id.btnRegister);
 		strUser = (EditText) findViewById(R.id.txtUser);
 		strPassword = (EditText) findViewById(R.id.txtPassword);
-		newUser = strUser.getText().toString();
-		newPassword = strPassword.getText().toString();
+		
 		
 		btnLogin.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
@@ -45,6 +44,8 @@ public class User extends Activity {
         btnRegister.setOnClickListener(new View.OnClickListener(){
 	    	public void onClick(View v){
 	    		Log.d("Register: ", "kominn inn i register");
+	    		newUser = strUser.getText().toString();
+	    		newPassword = strPassword.getText().toString();
 	    		Log.d("newUser", newUser);
 	    		Log.d("newPassword", newPassword);
 	    		db.addUser(new DbUser(newUser, newPassword));
