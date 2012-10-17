@@ -19,6 +19,9 @@ public class User extends Activity {
 	public void Login(View btnLogin){
 		EditText strUser = (EditText) findViewById(R.id.txtUser);
 		EditText strPassword = (EditText) findViewById(R.id.txtPassword);
+		
+		String newUser = strUser.getText().toString();
+		String newPassword = strPassword.getText().toString();
 	}
 	
 	public void Register(View btnRegister){

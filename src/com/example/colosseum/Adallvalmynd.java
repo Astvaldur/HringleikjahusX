@@ -71,7 +71,7 @@ public class Adallvalmynd extends ListActivity {
         switch (item.getItemId())
         {
         case R.id.menu_users:
-        	 Intent use = new Intent(getApplicationContext(), Leikur1.class);
+        	 Intent use = new Intent(getApplicationContext(), User.class);
              // sending data to new activity
              startActivity(use);
              return true;
