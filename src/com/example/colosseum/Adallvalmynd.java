@@ -61,6 +61,9 @@ public class Adallvalmynd extends ListActivity {
      * Event Handling for Individual menu item selected
      * Identify single menu item by it's id
      * */
+    /*
+     * COmment fra Astvaldi til arnors
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -86,7 +89,7 @@ public class Adallvalmynd extends ListActivity {
         case R.id.menu_share:
             Toast.makeText(Adallvalmynd.this, "Share is Selected", Toast.LENGTH_SHORT).show();
             return true;
- 
+
         case R.id.menu_mute:
         	Toast.makeText(Adallvalmynd.this, "Silent", Toast.LENGTH_SHORT).show();
             return true;
