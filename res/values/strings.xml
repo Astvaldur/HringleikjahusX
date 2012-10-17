@@ -6,4 +6,11 @@
     <string name="title_activity_adallvalmynd">Colosseum</string>
 	 <string name="leikur_5">Alien Invaders</string>
 	 <string name="Password">Password</string>
+	 <string name="menu_mute">mute</string>
+	  <string name="button_register">I do not have account. Register Me! </string>
+	  <string name="Login">Login</string>
+	 <string name="boolean_true">true</string>
+	 <string name="bull_hint_fyrir_password">Lykilord</string>
+	  <string name="email">Email</string>
+	  <string name="email_hint">ananoymus@eitthvad.eitthvad</string>
 </resources>

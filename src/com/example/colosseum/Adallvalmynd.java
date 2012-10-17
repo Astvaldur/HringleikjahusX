@@ -4,6 +4,7 @@ package com.example.colosseum;
 //Fyrir Listview
 import android.app.ListActivity;
 import android.content.Intent;
+//import android.media.AudioManager; // fyrir mute þegar það virkar
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,11 +20,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
  
 public class Adallvalmynd extends ListActivity {
+	//boolean mute_button=false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
- 
         // storing string resources into Array
+        
         String[] Leikir = getResources().getStringArray(R.array.Leikir_val);
  
         // Binding resources Array to ListAdapter
@@ -85,8 +87,8 @@ public class Adallvalmynd extends ListActivity {
             Toast.makeText(Adallvalmynd.this, "Share is Selected", Toast.LENGTH_SHORT).show();
             return true;
  
-        case R.id.menu_delete:
-            Toast.makeText(Adallvalmynd.this, "Delete is Selected", Toast.LENGTH_SHORT).show();
+        case R.id.menu_mute:
+        	Toast.makeText(Adallvalmynd.this, "Silent", Toast.LENGTH_SHORT).show();
             return true;
  
         case R.id.menu_preferences:
