@@ -28,6 +28,7 @@ public class User extends Activity {
 	}
 	
 	public void Register(View btnRegister){
+		Log.d("Register: ", "kominn inn i register");
 		EditText strUser = (EditText) findViewById(R.id.txtUser);
 		EditText strPassword = (EditText) findViewById(R.id.txtPassword);
 		
