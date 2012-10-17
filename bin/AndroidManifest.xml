@@ -23,9 +23,11 @@
         <activity android:name=".Leikur1"
                     android:label="Alien invaders"></activity>
         <!-- User -->
-        <activity android:name=".User"/>
+        <activity android:name=".User"
+					android:label="User screen"></activity>
         <!-- Connect Other activity -->
-        <activity android:name=".ConnectOther"/>
+        <activity android:name=".ConnectOther"
+			android:label="Connect other"></activity>
     </application>
 
 </manifest>

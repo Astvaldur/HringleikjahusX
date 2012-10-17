@@ -81,7 +81,7 @@ public class Adallvalmynd extends ListActivity {
             return true;
  
         case R.id.menu_connect_other: 
-        	Intent co = new Intent(getApplicationContext(), Leikur1.class);
+        	Intent co = new Intent(getApplicationContext(), ConnectOther.class);
         // sending data to new activity
         startActivity(co);
             return true;
