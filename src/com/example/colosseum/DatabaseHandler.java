@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 	
@@ -165,6 +166,42 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.delete(TABLE_USERS, KEY_ID + " = ?",
                 new String[] { String.valueOf(user.getID()) });
         db.close();
+    }
+    
+    public int checkUser(String username){
+        SQLiteDatabase db = this.getReadableDatabase();
+        
+        Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
+                KEY_USERNAME, KEY_PASSWORD }, KEY_USERNAME + "=?",
+                new String[] { username }, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()){
+        	Log.d("inn", "her a");
+            cursor.moveToFirst();
+        	int a=Integer.parseInt(cursor.getString(0));
+        	cursor.close();
+        	return a;
+        }
+    	else{
+    		Log.d("inn", "her b");
+    		return 0;
+    	}
+	}
+        
+    
+    public String getPassw(int userid){
+        SQLiteDatabase db = this.getReadableDatabase();
+        
+        Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
+                KEY_USERNAME, KEY_PASSWORD }, KEY_ID + "=?",
+                new String[] { String.valueOf(userid) }, null, null, null, null);
+        if (cursor != null){
+            cursor.moveToFirst();
+        	String a=cursor.getString(2);
+        	cursor.close();
+        	return a;
+        }
+    	else
+    		return null;
     }
     
     

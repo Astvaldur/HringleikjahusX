@@ -18,6 +18,8 @@ public class User extends Activity {
 	String newUser;
 	String newPassword;
 	
+	public int usrIdLogdIn;
+	
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,25 +35,59 @@ public class User extends Activity {
 		strUser = (EditText) findViewById(R.id.txtUser);
 		strPassword = (EditText) findViewById(R.id.txtPassword);
 		
-		
+		// chekca hvort user er til
+		// ef til checka hvort user matchar password
 		btnLogin.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
-	        	int a = 1;
-			}
-    	});
-        
-        
-        btnRegister.setOnClickListener(new View.OnClickListener(){
-	    	public void onClick(View v){
+	    		if(strUser == null || strPassword == null)
+	    			return;
 	    		Log.d("Register: ", "kominn inn i register");
 	    		newUser = strUser.getText().toString();
 	    		newPassword = strPassword.getText().toString();
-	    		Log.d("newUser", newUser);
-	    		Log.d("newPassword", newPassword);
-	    		db.addUser(new DbUser(newUser, newPassword));
-	    		Log.d("newUser", newUser);
-	    		Log.d("newPassword", newPassword);
+	    		
+	    		int usrId = db.checkUser(newUser);
+	    		
+	    		if(usrId != 0){
+	    			String passw=db.getPassw(usrId);
+	    			Log.d("check1", newPassword);
+	    			Log.d("check2", passw);
+	    			if(passw.equals(newPassword)){
+	    				usrIdLogdIn = usrId;
+	    				Log.d("Loggadur inn:", newUser);
+	    			}
+	    			else{
+	    				//sömuleiðis splash screen og stroka út innskráð í glugga
+	    				Log.d("Password: ", "Invalid");
+	    				return;
+	    			}
+	    		}
+	    		
+	    		
+	    		
+			}
+    	});
+        
+        btnRegister.setOnClickListener(new View.OnClickListener(){
+	    	public void onClick(View v){
+	    		if(strUser == null || strPassword == null)
+	    			return;
+	    		Log.d("Register: ", "kominn inn i register");
+	    		newUser = strUser.getText().toString();
+	    		newPassword = strPassword.getText().toString();
+	    		
+	    		int chkUsr = db.checkUser(newUser);
+	    		if(chkUsr == 0){
+	    			db.addUser(new DbUser(newUser, newPassword));
+	    			Log.d("Logd in: ", newUser);
+	    		}
+	    		else{
+	    			//splash screen með þessum error!!
+	    			Log.d("error", "user exists");
+	    		}
+	    		
+	    		
 	    		//aukadót meðan verið er að vinna í db
+	    		// skoða users í db
 	    		List<DbUser> users = db.getAllUsers();
 	    		
 	    		Log.d("Name: ", "kominn");

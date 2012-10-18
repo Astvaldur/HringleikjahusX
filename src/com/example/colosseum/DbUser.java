@@ -43,7 +43,7 @@ public class DbUser {
         this._username = username;
     }
  
-    // getting password   --->meikar ekki mikinn sens ad thurfa
+    // getting password   --->
     public String getPassword(){
         return this._password;
     }
