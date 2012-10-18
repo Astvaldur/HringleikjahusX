@@ -4,25 +4,25 @@ public class DbScore {
  
     //private variables
     int _id;
-    String _username;
-    String _gamename; 
+    int _userid;
+    int _gameid; 
     long _score;
  
     // Empty constructor
     public DbScore(){}
     
     // constructor
-    public DbScore(int id, String username, String gamename, long score){
+    public DbScore(int id, int userid, int gameid, long score){
         this._id = id;
-        this._username = username;
-        this._gamename = gamename;    //breytti frá tutorial, tok fra _
+        this._userid = userid;
+        this._gameid = gameid;    //breytti frá tutorial, tok fra _
         this._score = score;
     }
  
     // constructor
-    public DbScore(String username, String gamename, long score){
-        this._username = username;
-        this._gamename = gamename;// sama og i constructor ad ofan.
+    public DbScore(int userid, int gameid, long score){
+        this._userid = userid;
+        this._gameid = gameid;// sama og i constructor ad ofan.
         this._score = score;
     }
     // getting ID
@@ -36,23 +36,23 @@ public class DbScore {
     }
  
     // getting name
-    public String getUsername(){
-        return this._username;
+    public int getUserid(){
+        return this._userid;
     }
  
     // setting name
-    public void setUsername(String username){
-        this._username = username;
+    public void setUserid(int userid){
+        this._userid = userid;
     }
  
     // getting password   --->meikar ekki mikinn sens ad thurfa
-    public String getGamename(){
-        return this._gamename;
+    public int getGameid(){
+        return this._gameid;
     }
  
     // setting password
-    public void setGamename(String gamename){
-        this._gamename = gamename;
+    public void setGameid(int gameid){
+        this._gameid = gameid;
     }
     
     // setting password

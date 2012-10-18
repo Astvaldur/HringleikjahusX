@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class User extends Activity {
 	
@@ -41,7 +42,6 @@ public class User extends Activity {
 			public void onClick(View v){
 	    		if(strUser == null || strPassword == null)
 	    			return;
-	    		Log.d("Register: ", "kominn inn i register");
 	    		newUser = strUser.getText().toString();
 	    		newPassword = strPassword.getText().toString();
 	    		
@@ -53,11 +53,13 @@ public class User extends Activity {
 	    			Log.d("check2", passw);
 	    			if(passw.equals(newPassword)){
 	    				usrIdLogdIn = usrId;
-	    				Log.d("Loggadur inn:", newUser);
+	    				Toast.makeText(User.this, newUser + "is now logged in.", Toast.LENGTH_SHORT).show();
+	    				//Log.d("Loggadur inn:", newUser);
 	    			}
 	    			else{
 	    				//sömuleiðis splash screen og stroka út innskráð í glugga
-	    				Log.d("Password: ", "Invalid");
+	    				Toast.makeText(User.this, "Password entered is invalid", Toast.LENGTH_SHORT).show();
+	    				//Log.d("Password: ", "Invalid");
 	    				return;
 	    			}
 	    		}
@@ -71,31 +73,33 @@ public class User extends Activity {
 	    	public void onClick(View v){
 	    		if(strUser == null || strPassword == null)
 	    			return;
-	    		Log.d("Register: ", "kominn inn i register");
+	    		//Log.d("Register: ", "kominn inn i register");
 	    		newUser = strUser.getText().toString();
 	    		newPassword = strPassword.getText().toString();
 	    		
 	    		int chkUsr = db.checkUser(newUser);
 	    		if(chkUsr == 0){
 	    			db.addUser(new DbUser(newUser, newPassword));
-	    			Log.d("Logd in: ", newUser);
+	    			//Log.d("Logd in: ", newUser);
+	    			Toast.makeText(User.this, newUser + "has successfully registered.", Toast.LENGTH_SHORT).show();
 	    		}
 	    		else{
 	    			//splash screen með þessum error!!
-	    			Log.d("error", "user exists");
+	    			//Log.d("error", "user exists");
+	    			Toast.makeText(User.this, "Error: this username already in use.", Toast.LENGTH_SHORT).show();
 	    		}
 	    		
 	    		
 	    		//aukadót meðan verið er að vinna í db
 	    		// skoða users í db
-	    		List<DbUser> users = db.getAllUsers();
+//	    		List<DbUser> users = db.getAllUsers();
 	    		
-	    		Log.d("Name: ", "kominn");
-	    		for (DbUser u : users) {
-	    			String log = "Id: "+u.getID()+" ,Name: " + u.getUsername() + " ,Phone: " + u.getPassword();
-	                // Writing Contacts to log
-	    			Log.d("Name: ", log);
-	    		}
+//	    		Log.d("Name: ", "kominn");
+//	    		for (DbUser u : users) {
+//	    			String log = "Id: "+u.getID()+" ,Name: " + u.getUsername() + " ,Phone: " + u.getPassword();
+//	                // Writing Contacts to log
+//	    			Log.d("Name: ", log);
+//	    		}
 	    	}
 
         });

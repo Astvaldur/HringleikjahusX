@@ -35,6 +35,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     
     // Score Table Columns names
     private static final String KEY_SCORE = "score";
+    private static final String KEY_USERID = "userid";
+    private static final String KEY_GAMEID = "gameid";
+    
     
     
     public DatabaseHandler(Context context) {
@@ -56,8 +59,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         
         // spurning með unique á username.... overall score , virkar ekki foreign keys..
         String CREATE_TABLE_SCORE = "CREATE TABLE " + TABLE_SCORES + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERNAME + " TEXT NOT NULL,"
-                + KEY_GAMENAME + " TEXT NOT NULL," + KEY_SCORE + " INTEGER NOT NULL" + ")";  
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERID + " INTEGER NOT NULL,"
+                + KEY_GAMEID + " INTEGER NOT NULL," + KEY_SCORE + " INTEGER NOT NULL" + ")";  
                 //+ " FOREIGN KEY ("+ KEY_USERNAME +") REFERENCES "+ TABLE_USERS +" ("+ KEY_USERNAME +")," + 
                 //" FOREIGN KEY ("+ KEY_GAMENAME +") REFERENCES "+ TABLE_GAMES +" ("+ KEY_GAMENAME +"))";
                 db.execSQL(CREATE_TABLE_SCORE);
@@ -306,8 +309,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     	SQLiteDatabase db = this.getWritableDatabase();
 	  
 	    ContentValues values = new ContentValues();
-	    values.put(KEY_USERNAME, score.getUsername());
-	    values.put(KEY_GAMENAME, score.getGamename()); // Contact Name
+	    values.put(KEY_USERID, score.getUserid());
+	    values.put(KEY_GAMEID, score.getGameid ()); // Contact Name
 	    values.put(KEY_SCORE, score.getScore()); // Contact Phone Number
 	 
 	    // Inserting Row
@@ -326,7 +329,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
      
         DbScore score = new DbScore(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2), Long.parseLong(cursor.getString(3)));
+        		Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2))
+        		, Long.parseLong(cursor.getString(3)));
         // return contact
         return score;
     }
@@ -346,8 +350,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	        do {
 	            DbScore score = new DbScore();
 	            score.setID(Integer.parseInt(cursor.getString(0)));
-	            score.setUsername(cursor.getString(1));
-	            score.setGamename(cursor.getString(2));
+	            score.setUserid(Integer.parseInt(cursor.getString(1)));
+	            score.setGameid(Integer.parseInt(cursor.getString(2)));
 	            score.setScore(Long.parseLong(cursor.getString(3)));
 	            // Adding contact to list
 	            scoresList.add(score);
@@ -373,8 +377,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         
         ContentValues values = new ContentValues();
-        values.put(KEY_USERNAME, score.getUsername());
-        values.put(KEY_GAMENAME, score.getGamename());
+        values.put(KEY_USERID, score.getUserid());
+        values.put(KEY_GAMEID, score.getGameid());
         values.put(KEY_SCORE, score.getScore());
      
         // updating row
