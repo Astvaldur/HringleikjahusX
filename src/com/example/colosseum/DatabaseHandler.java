@@ -8,13 +8,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
+// klasi sem sér um að búa til, lesa, uppfæra og eyða úr gagnagrunnunum.
 public class DatabaseHandler extends SQLiteOpenHelper {
 	
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 13;  //ekkki 1 ámeðan við vinnum
+    private static final int DATABASE_VERSION = 13;  //ekki 1 ámeðan við vinnum
  
     // Database Name
     private static final String DATABASE_NAME = "UsersScoresAndGames";
@@ -24,27 +24,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TABLE_GAMES = "games";
     private static final String TABLE_SCORES = "scores";
  
-    // Contacts Table Columns names
+    // Users Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
  
-    // Game Table Columns names
+    // Games Table Columns names
     private static final String KEY_GAMENAME = "gamename";
     private static final String KEY_OHSCORE = "ohscore";
     
-    // Score Table Columns names
+    // Scores Table Columns names
     private static final String KEY_SCORE = "score";
     private static final String KEY_USERID = "userid";
     private static final String KEY_GAMEID = "gameid";
     
     
-    
+    // constructor 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
  
-    // Creating Tables
+    // Creating All Three Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
@@ -57,12 +57,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_OHSCORE + " INTEGER NOT NULL" + ")";
         db.execSQL(CREATE_GAMES_TABLE);
         
-        // spurning með unique á username.... overall score , virkar ekki foreign keys..
+        // foreign keys?
         String CREATE_TABLE_SCORE = "CREATE TABLE " + TABLE_SCORES + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERID + " INTEGER NOT NULL,"
                 + KEY_GAMEID + " INTEGER NOT NULL," + KEY_SCORE + " INTEGER NOT NULL" + ")";  
-                //+ " FOREIGN KEY ("+ KEY_USERNAME +") REFERENCES "+ TABLE_USERS +" ("+ KEY_USERNAME +")," + 
-                //" FOREIGN KEY ("+ KEY_GAMENAME +") REFERENCES "+ TABLE_GAMES +" ("+ KEY_GAMENAME +"))";
                 db.execSQL(CREATE_TABLE_SCORE);
     }
  
@@ -90,8 +88,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	  
 	    ContentValues values = new ContentValues();
 	    //values.putNull(KEY_ID);
-	    values.put(KEY_USERNAME, user.getUsername()); // Contact Name
-	    values.put(KEY_PASSWORD, user.getPassword()); // Contact Phone Number
+	    values.put(KEY_USERNAME, user.getUsername()); 
+	    values.put(KEY_PASSWORD, user.getPassword()); 
 	 
 	    // Inserting Row
 	    db.insert(TABLE_USERS, null, values);
@@ -110,7 +108,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      
         DbUser user = new DbUser(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2));
-        // return contact
+        // return user
         return user;
     }
      
@@ -131,12 +129,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	            user.setID(Integer.parseInt(cursor.getString(0)));
 	            user.setUsername(cursor.getString(1));
 	            user.setPassword(cursor.getString(2));
-	            // Adding contact to list
+	            // Adding user to list
 	            usersList.add(user);
 	        } while (cursor.moveToNext());
 	    }
 	 
-	    // return contact list
+	    // return user list
 	    return usersList;
     }
      
@@ -163,7 +161,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[] { String.valueOf(user.getID()) });
     }
      
-    // Deleting single contact
+    // Deleting single user
     public void deleteUser(DbUser user) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USERS, KEY_ID + " = ?",
@@ -171,6 +169,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
     
+    // check if user med username er loggadur inn
     public int checkUser(String username){
         SQLiteDatabase db = this.getReadableDatabase();
         
@@ -178,19 +177,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 KEY_USERNAME, KEY_PASSWORD }, KEY_USERNAME + "=?",
                 new String[] { username }, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()){
-        	Log.d("inn", "her a");
             cursor.moveToFirst();
         	int a=Integer.parseInt(cursor.getString(0));
         	cursor.close();
         	return a;
         }
     	else{
-    		Log.d("inn", "her b");
     		return 0;
     	}
 	}
         
     
+    // na i password fyrir tiltekinn user
     public String getPassw(int userid){
         SQLiteDatabase db = this.getReadableDatabase();
         
@@ -218,8 +216,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	  
 	    ContentValues values = new ContentValues();
 	    //values.putNull(KEY_ID);
-	    values.put(KEY_GAMENAME, game.getGamename()); // Contact Name
-	    values.put(KEY_OHSCORE, game.getOHScore()); // Contact Phone Number
+	    values.put(KEY_GAMENAME, game.getGamename());
+	    values.put(KEY_OHSCORE, game.getOHScore()); 
 	 
 	    // Inserting Row
 	    db.insert(TABLE_GAMES, null, values);
@@ -238,11 +236,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      
         DbGame game = new DbGame(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), Long.parseLong(cursor.getString(2)));
-        // return contact
+        // return game
         return game;
     }
      
-    // Getting All Users
+    // Getting All Games
     public List<DbGame> getAllGames() {
     	
 	   List<DbGame> gamesList = new ArrayList<DbGame>();
@@ -259,12 +257,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	            game.setID(Integer.parseInt(cursor.getString(0)));
 	            game.setGamename(cursor.getString(1));
 	            game.setOHScore(Long.parseLong(cursor.getString(2)));
-	            // Adding contact to list
+	            // Adding game to list
 	            gamesList.add(game);
 	        } while (cursor.moveToNext());
 	    }
 	 
-	    // return contact list
+	    // return game list
 	    return gamesList;
     }
      
@@ -291,7 +289,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[] { String.valueOf(game.getID()) });
     }
      
-    // Deleting single contact
+    // Deleting single game
     public void deleteGame(DbGame game) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_GAMES, KEY_ID + " = ?",
@@ -310,20 +308,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	  
 	    ContentValues values = new ContentValues();
 	    values.put(KEY_USERID, score.getUserid());
-	    values.put(KEY_GAMEID, score.getGameid ()); // Contact Name
-	    values.put(KEY_SCORE, score.getScore()); // Contact Phone Number
+	    values.put(KEY_GAMEID, score.getGameid ()); 
+	    values.put(KEY_SCORE, score.getScore()); 
 	 
 	    // Inserting Row
 	    db.insert(TABLE_SCORES, null, values);
 	    db.close(); // Closing database connection
     }
      
-    // Getting single game
+    // Getting single score
     public DbScore getScore(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         
-        Cursor cursor = db.query(TABLE_SCORES, new String[] { KEY_ID, KEY_USERNAME,
-                KEY_GAMENAME, KEY_SCORE}, KEY_ID + "=?",
+        Cursor cursor = db.query(TABLE_SCORES, new String[] { KEY_ID, KEY_USERID,
+                KEY_GAMEID, KEY_SCORE}, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -331,11 +329,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         DbScore score = new DbScore(Integer.parseInt(cursor.getString(0)),
         		Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2))
         		, Long.parseLong(cursor.getString(3)));
-        // return contact
+        // return score
         return score;
     }
      
-    // Getting All Users
+    // Getting All Scores
     public List<DbScore> getAllScores() {
     	
 	   List<DbScore> scoresList = new ArrayList<DbScore>();
@@ -353,12 +351,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	            score.setUserid(Integer.parseInt(cursor.getString(1)));
 	            score.setGameid(Integer.parseInt(cursor.getString(2)));
 	            score.setScore(Long.parseLong(cursor.getString(3)));
-	            // Adding contact to list
+	            // Adding score to list
 	            scoresList.add(score);
 	        } while (cursor.moveToNext());
 	    }
 	 
-	    // return contact list
+	    // return score list
 	    return scoresList;
     }
      
@@ -372,7 +370,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return count
         return cursor.getCount();
     }
-    // Updating game 
+    // Updating score
     public int updateScore(DbScore score) {
         SQLiteDatabase db = this.getWritableDatabase();
         
@@ -386,7 +384,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[] { String.valueOf(score.getID()) });
     }
      
-    // Deleting single contact
+    // Deleting single score
     public void deleteScore(DbScore score) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_SCORES, KEY_ID + " = ?",

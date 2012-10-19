@@ -15,13 +15,13 @@ public class DbUser {
     public DbUser(int id, String username, String password){
         this._id = id;
         this._username = username;
-        this._password = password;    //breytti frá tutorial, tok fra _
+        this._password = password;    
     }
  
     // constructor
     public DbUser(String username, String password){
         this._username = username;
-        this._password = password;  // sama og i constructor ad ofan.
+        this._password = password;  
     }
     // getting ID
     public int getID(){
@@ -43,7 +43,7 @@ public class DbUser {
         this._username = username;
     }
  
-    // getting password   --->
+    // getting password 
     public String getPassword(){
         return this._password;
     }

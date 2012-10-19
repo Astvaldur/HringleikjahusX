@@ -15,17 +15,17 @@ public class DbScore {
     public DbScore(int id, int userid, int gameid, long score){
         this._id = id;
         this._userid = userid;
-        this._gameid = gameid;    //breytti frá tutorial, tok fra _
+        this._gameid = gameid;
         this._score = score;
     }
  
     // constructor
     public DbScore(int userid, int gameid, long score){
         this._userid = userid;
-        this._gameid = gameid;// sama og i constructor ad ofan.
+        this._gameid = gameid;
         this._score = score;
     }
-    // getting ID
+    // getting id
     public int getID(){
         return this._id;
     }
@@ -35,32 +35,32 @@ public class DbScore {
         this._id = id;
     }
  
-    // getting name
+    // getting userid
     public int getUserid(){
         return this._userid;
     }
  
-    // setting name
+    // setting userid
     public void setUserid(int userid){
         this._userid = userid;
     }
  
-    // getting password   --->meikar ekki mikinn sens ad thurfa
+    // getting gameid 
     public int getGameid(){
         return this._gameid;
     }
  
-    // setting password
+    // setting gameid
     public void setGameid(int gameid){
         this._gameid = gameid;
     }
     
-    // setting password
+    // setting score
     public long getScore(){
         return this._score;
     }
  
-    // setting password
+    // setting score 
     public void setScore(long score){
         this._score = score;
     }

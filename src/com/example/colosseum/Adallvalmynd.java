@@ -21,6 +21,9 @@ import android.widget.Toast;
  
 public class Adallvalmynd extends ListActivity {
 	//boolean mute_button=false;
+
+    public static int usrIdLogdIn=0;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +63,7 @@ public class Adallvalmynd extends ListActivity {
     /**
      * Event Handling for Individual menu item selected
      * Identify single menu item by it's id
-     * */
-    /*
-     * COmment fra Astvaldi til arnors
-     */
+     * */  
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {

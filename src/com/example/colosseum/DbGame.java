@@ -14,13 +14,13 @@ public class DbGame {
     public DbGame(int id, String gamename, long ohscore){
         this._id = id;
         this._gamename = gamename;
-        this._ohscore = ohscore;    //breytti frá tutorial, tok fra _
+        this._ohscore = ohscore;    
     }
  
     // constructor
     public DbGame(String gamename, long ohscore){
         this._gamename = gamename;
-        this._ohscore = ohscore;  // sama og i constructor ad ofan.
+        this._ohscore = ohscore;  
     }
     // getting ID
     public int getID(){
@@ -32,22 +32,22 @@ public class DbGame {
         this._id = id;
     }
  
-    // getting name
+    // getting gamename
     public String getGamename(){
         return this._gamename;
     }
  
-    // setting name
+    // setting gamename
     public void setGamename(String gamename){
         this._gamename = gamename;
     }
  
-    // getting password   --->meikar ekki mikinn sens ad thurfa
+    // getting overall highscore
     public long getOHScore(){
         return this._ohscore;
     }
  
-    // setting password
+    // setting overall highscore
     public void setOHScore(long ohscore){
         this._ohscore = ohscore;
     }
